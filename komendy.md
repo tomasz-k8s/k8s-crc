@@ -121,3 +121,10 @@ spec:                        # Specyfikacja Poda - najważniejsza część!
     ports:                 # Lista portów do ekspozycji
     - containerPort: 80    # Port na którym aplikacja nasłuchuje w kontenerze
 ```
+
+Stworzenie Secrets z poziomu komendy
+```bash
+kubectl create secret generic db-secrets-XX \
+  --from-literal=username=admin \
+  --from-literal=password=password123
+  ```
