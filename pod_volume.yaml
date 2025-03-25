@@ -1,0 +1,28 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: [cm_name]
+data:
+  ENVIRONMENT: development
+  DBURL: new_value
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: [pod_name]
+  labels:
+    app: backend
+    env: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:                 
+    - containerPort: 8080
+    volumeMounts:
+    - name: config-volume
+      mountPath: /config
+  volumes:
+  - name: config-volume
+    configMap:
+      name: [cm_name]
