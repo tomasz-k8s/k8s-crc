@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-tomek
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-tomek
+  template:
+    metadata:
+      labels:
+        app: nginx-tomek
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-public-lb-XX
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-XX
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
